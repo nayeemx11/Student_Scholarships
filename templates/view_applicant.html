@@ -44,23 +44,27 @@
         // Update the register icon
         if (isEligible) {
           regIconContainer.innerHTML = `
-            <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
-          `;
+          <svg width="46" height="47" viewBox="0 0 46 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.60001 42.2999L4.60078 35.2492C4.60121 31.3559 7.69032 28.1999 11.5008 28.1999H25.2997M31.05 34.0749L33.35 36.4249L41.4 28.1999M27.6 11.7499C27.6 15.6436 24.5108 18.7999 20.7 18.7999C16.8892 18.7999 13.8 15.6436 13.8 11.7499C13.8 7.85634 16.8892 4.69995 20.7 4.69995C24.5108 4.69995 27.6 7.85634 27.6 11.7499Z" stroke="#1ED914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>          `;
         } else {
           regIconContainer.innerHTML = `
-            <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
-          `;
+          <svg width="46" height="47" viewBox="0 0 46 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.59998 42.2999L4.60075 35.2492C4.60118 31.3559 7.69029 28.1999 11.5008 28.1999H25.2997M31.05 34.0749L33.35 36.4249L41.4 28.1999M27.6 11.7499C27.6 15.6436 24.5107 18.7999 20.7 18.7999C16.8892 18.7999 13.8 15.6436 13.8 11.7499C13.8 7.85634 16.8892 4.69995 20.7 4.69995C24.5107 4.69995 27.6 7.85634 27.6 11.7499Z" stroke="#E11A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>          `;
         }
 
         // Update the select icon
         if (canGetScholarship) {
           selectIconContainer.innerHTML = `
-            <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
-          `;
+          <svg width="46" height="47" viewBox="0 0 46 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.60001 42.2999L4.60078 35.2492C4.60121 31.3559 7.69032 28.1999 11.5008 28.1999H25.2997M31.05 34.0749L33.35 36.4249L41.4 28.1999M27.6 11.7499C27.6 15.6436 24.5108 18.7999 20.7 18.7999C16.8892 18.7999 13.8 15.6436 13.8 11.7499C13.8 7.85634 16.8892 4.69995 20.7 4.69995C24.5108 4.69995 27.6 7.85634 27.6 11.7499Z" stroke="#1ED914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>          `;
         } else {
           selectIconContainer.innerHTML = `
-            <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
-          `;
+          <svg width="46" height="47" viewBox="0 0 46 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.59998 42.2999L4.60075 35.2492C4.60118 31.3559 7.69029 28.1999 11.5008 28.1999H25.2997M31.05 34.0749L33.35 36.4249L41.4 28.1999M27.6 11.7499C27.6 15.6436 24.5107 18.7999 20.7 18.7999C16.8892 18.7999 13.8 15.6436 13.8 11.7499C13.8 7.85634 16.8892 4.69995 20.7 4.69995C24.5107 4.69995 27.6 7.85634 27.6 11.7499Z" stroke="#E11A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>          `;
         }
       {% endfor %}
     });
