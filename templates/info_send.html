@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid row">
+    <div class="container d-flex flex-column align-items-center col-7">
+      <form method="POST" action="{% url 'award_send' initial_data.student_identity_number %}">
+        {% csrf_token %}
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="student_identity_number">Student ID</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-user"></i></span>
+              <input type="text" class="form-control" id="student_identity_number" name="student_identity_number" aria-label="student_identity_number" aria-describedby="basic-addon1" required value="{{ initial_data.student_identity_number }}" />
+              {{ form.student_identity_number.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="first_name">First Name</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon3"><i class="fa-regular fa-user"></i></span>
+              <input type="text" class="form-control" id="first_name" name="first_name" aria-label="first_name" aria-describedby="basic-addon3" required value="{{ initial_data.first_name }}" />
+              {{ form.first_name.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="last_name">Last Name</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon4"><i class="fa-regular fa-user"></i></span>
+              <input type="text" class="form-control" id="last_name" name="last_name" aria-label="last_name" aria-describedby="basic-addon4" required value="{{ initial_data.last_name }}" />
+              {{ form.last_name.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="email">Email Address</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon5"><i class="fa-regular fa-envelope"></i></span>
+              <input type="email" class="form-control" id="email" name="email" aria-label="email" aria-describedby="basic-addon5" required value="{{ initial_data.email }}" />
+              {{ form.email.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="amount">Amount</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon7"><i class="fa-regular fa-venus-mars"></i></span>
+              <input type="text" class="form-control" id="amount" name="amount" aria-label="amount" aria-describedby="basic-addon7" required value="{{ initial_data.amount }}" />
+              {{ form.amount.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="season">Season</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon8"><i class="fa-regular fa-calendar"></i></span>
+              <select class="form-select" id="season" name="season" aria-label="season" required>
+                <option value="" disabled selected>Select Season</option>
+                <option value="Spring">Spring</option>
+                <option value="Fall">Fall</option>
+                <option value="Summer">Summer</option>
+              </select>
+              {{ form.season.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+          <button type="submit" class="btn btn-primary">Click For Sending Info to Accounts</button>
+        </div>
+      </form>
+      <a href="{% url 'index' %}" class="btn btn-link mt-2">Cancel</a>
+    </div>
+  </div>
+{% endblock %}

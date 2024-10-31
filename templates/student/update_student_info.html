@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container-fluid row">
+    <div class="container d-flex flex-column align-items-center col-7">
+      <!--  
+        <h2>Update Student Information</h2>action="{% url 'update_student_info' %}"
+        -->
+
+      <form method="POST">
+        {% csrf_token %}
+        <p class="text-center">Enter your Information</p>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="student_identity_number">Student ID</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-user"></i></span>
+              <input type="text" class="form-control" id="student_identity_number" name="student_identity_number" aria-label="student_identity_number" aria-describedby="basic-addon1" required />
+              {{ form.student_identity_number.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="ssn">SSN</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon2"><i class="fa-regular fa-user"></i></span>
+              <input type="text" class="form-control" id="ssn" name="ssn" aria-label="ssn" aria-describedby="basic-addon2" required />
+              {{ form.ssn.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="first_name">First Name</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon3"><i class="fa-regular fa-user"></i></span>
+              <input type="text" class="form-control" id="first_name" name="first_name" aria-label="first_name" aria-describedby="basic-addon3" required />
+              {{ form.first_name.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="last_name">Last Name</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon4"><i class="fa-regular fa-user"></i></span>
+              <input type="text" class="form-control" id="last_name" name="last_name" aria-label="last_name" aria-describedby="basic-addon4" required />
+              {{ form.last_name.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="email">Email Address</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon5"><i class="fa-regular fa-envelope"></i></span>
+              <input type="email" class="form-control" id="email" name="email" aria-label="email" aria-describedby="basic-addon5" required />
+              {{ form.email.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="mobile_number">Phone No.</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon6"><i class="fa-regular fa-phone"></i></span>
+              <input type="text" class="form-control" id="mobile_number" name="mobile_number" aria-label="mobile_number" aria-describedby="basic-addon6" required />
+              {{ form.mobile_number.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- 
+            <div class="col-6">
+              <label class="form-label" for="user_gender">Gender</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon7"><i class="fa-regular fa-venus-mars"></i></span>
+                <input type="text" class="form-control" id="user_gender" name="user_gender" aria-label="user_gender" aria-describedby="basic-addon7" required />
+                {{ form.user_gender.errors }}
+              </div>
+            </div>
+           -->
+          <div class="col-6">
+            <label class="form-label" for="user_gender">Gender</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon7"><i class="fa-regular fa-venus-mars"></i></span>
+              <select class="form-select" id="user_gender" name="user_gender" aria-label="user_gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              {{ form.user_gender.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="date_of_birth">DOB</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon8"><i class="fa-regular fa-calendar"></i></span>
+              <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" aria-label="date_of_birth" aria-describedby="basic-addon8" required />
+              {{ form.date_of_birth.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="current_status">Status</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon9"><i class="fa-regular fa-info-circle"></i></span>
+              <input type="text" class="form-control" id="current_status" name="current_status" aria-label="current_status" aria-describedby="basic-addon9" required />
+              {{ form.current_status.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="cumulative_gpa">Cumulative GPA</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon10"><i class="fa-regular fa-graduation-cap"></i></span>
+              <input type="text" class="form-control" id="cumulative_gpa" name="cumulative_gpa" aria-label="cumulative_gpa" aria-describedby="basic-addon10" required />
+              {{ form.cumulative_gpa.errors }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label" for="credit_hours">Credit Hours Taken</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon11"><i class="fa-regular fa-book"></i></span>
+              <input type="text" class="form-control" id="credit_hours" name="credit_hours" aria-label="credit_hours" aria-describedby="basic-addon11" required />
+              {{ form.credit_hours.errors }}
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label" for="department">Department</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon12"><i class="fa-regular fa-building"></i></span>
+              <input type="text" class="form-control" id="department" name="department" aria-label="department" aria-describedby="basic-addon12" required />
+              {{ form.department.errors }}
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center">Please save your information, then review it before submitting your application.</p>
+
+        <div class="d-flex justify-content-center mt-3">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+      <a href="{% url 'index' %}" class="btn btn-link mt-2">Cancel</a>
+    </div>
+
+    <div class="container col-4 d-flex align-items-center justify-content-center vh-50">
+      <div class="text-center" style="">
+        <p>Information Check With Register</p>
+        <form method="POST" action="{% url 'verify_student' %}">
+          {% csrf_token %}
+          <button class="btn btn-primary mb-5 p-3" style="width: 250px;">Register Check</button>
+        </form>
+        
+        <form method="POST" action="{% url 'apply_scholarship' %}">
+          {% csrf_token %}
+          <button class="btn btn-primary mb-5 p-3" style="width: 250px;">SUBMIT APPLICATION</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

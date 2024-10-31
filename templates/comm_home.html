@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  Commitee Home Page
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mb-5">Welcome .</h1>
+
+    <div class="d-flex justify-content-center mb-5">
+      <a href="{% url 'update_student_info' %}" class="btn btn-primary mb-3 p-3 text-white" style="width: 250px; text-decoration: none;">Apply for Scholarship</a>
+    </div>
+
+    <div class="container col-auto row mb-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-primary mb-3 p-3" style="width: 250px;"><a class="text-white" style="text-decoration: none; color: inherit;" href="{% url 'update_student_info' %}">Apply for Scholarship</a></button>
+        <button class="btn btn-primary mb-3 p-3" style="width: 250px;"><a class="text-white" style="text-decoration: none; color: inherit;" href="{% url 'verify_student' %}" >View Scholarship</a></button>
+      </div>
+    </div>
+
+
+    <div class="container col-auto row mb-5">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-primary mb-3 p-3" style="width: 250px;"><a class="text-white" style="text-decoration: none; color: inherit;" href="{% url 'update_student_info' %}">Apply for Scholarship</a></button>
+        <button class="btn btn-primary mb-3 p-3" style="width: 250px;"><a class="text-white" style="text-decoration: none; color: inherit;" href="{% url 'verify_student' %}" >View Scholarship</a></button>
+      </div>
+    </div>
+
+    
+  </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  Message
+{% endblock %}
+
+{% block content %}
+  <div class="container col-auto mb-5">
+    <div class="d-flex justify-content-center align-items-center">
+      <p class="d-flex align-items-center">Message</p>
+    </div>
+
+    {% for msg in messages_all %}
+      <div class="d-flex mb-5 justify-content align-items-center">
+        <div class="col-auto">
+          <i class="fa-regular fa-comment"></i>
+          <div class="bg-secondary text-dark p-3 d-flex flex-column" style="width: 400px; height: auto;">
+            <p class="mb-0">Application Details For {{ msg.student.user.username }}</p>
+            <p class="mb-0">Student ID: {{ msg.student.student_identity_number }}</p>
+            <p class="mb-0">Award Date: {{ msg.award.awarded_date }}</p>
+            <p class="mb-0">Amount Received: {{ msg.amount_received }}</p>
+            <p class="mb-0">Season: {{ msg.season_received }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endblock %}

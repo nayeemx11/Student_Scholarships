@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  Sign Up
+{% endblock %}
+
+{% block content %}
+  <p>A@#1A@#1</p>
+  <div class="container">
+    <h1>Sign Up Page</h1>
+
+    {% if user.is_authenticated %}
+      <h1>You are already logged in, {{ user.username }}.</h1>
+      <hr />
+      <h2>Go to home page <a href="{% url 'index' %}">Home</a></h2>
+    {% else %}
+      <div class="text-center">
+        <h2 class="fw-bold">Smart Scholarship</h2>
+        <p class="fs-2">Get Started Now</p>
+        <p>Enter Your Credentials to Create your account</p>
+      </div>
+
+      <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+
+        <div>
+          <label class="form-label" for="username">Name</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-user"></i></span>
+            <input type="text" class="form-control" placeholder="Name" id="username" name="username" aria-label="username" aria-describedby="basic-addon1" required />
+            {{ form.username.errors }}
+          </div>
+        </div>
+
+        <label class="form-label" for="email">Email</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon2"><i class="fa-regular fa-envelope"></i></span>
+          <input type="email" class="form-control" placeholder="Email" id="email" name="email" aria-label="email" aria-describedby="basic-addon2" required />
+          {{ form.email.errors }}
+        </div>
+
+        <label class="form-label" for="password">Password</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3"><i class="fas fa-lock"></i></span>
+          <input type="password" class="form-control" placeholder="* * * * * * * *" id="password" name="password1" aria-label="password" aria-describedby="basic-addon3" required />
+          <span class="input-group-text" id="togglePassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></span>
+          {{ form.password.errors }}
+        </div>
+
+        <label class="form-label" for="confirm_password">Confirm Password</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon4"><i class="fas fa-lock"></i></span>
+          <input type="password" class="form-control" placeholder="* * * * * * * *" id="confirm_password" name="password2" aria-label="confirm_password" aria-describedby="basic-addon4" required />
+          <span class="input-group-text" id="toggleConfirmPassword" style="cursor: pointer;"><i class="fas fa-eye-slash"></i></span>
+          {{ form.confirm_password.errors }}
+        </div>
+
+        <div class="row">
+          
+            <div class="col-md-4 mb-3">
+              <label for="state" class="form-label">State</label>
+              <div class="dropdown">
+                <input type="text" name="state" id="state" placeholder="State" class="btn btn-secondary dropdown-toggle form-control" role="button" data-bs-toggle="dropdown" aria-expanded="false" readonly />
+                <ul class="dropdown-menu">
+                  {% for st in form.state.field.choices %}
+                    <li class="dropdown-item" onclick="setState('{{ st.0 }}')">{{ st.1 }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="zipcode" class="form-label">Zipcode</label>
+            <input type="number" name="zipcode" class="form-control" id="zipcode" placeholder="12345" required />
+            {{ form.zipcode.errors }}
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="mobile_number" class="form-label">Mobile Number</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon5"><i class="fas fa-phone"></i></span>
+              <input type="text" class="form-control" placeholder="123-456-789" id="mobile_number" name="mobile_number" aria-label="mobile_number" aria-describedby="basic-addon5" required />
+              {{ form.mobile_number.errors }}
+            </div>
+          </div>
+        </div>
+
+        <p class="text-end">
+          <a href="#" class="text-decoration-none">Forget Password</a>
+        </p>
+
+        <div class="row justify-content-center">
+          <div class="col-auto mb-3">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </div>
+          <p class="text-center">
+            Don't have an account? <a href="{% url 'signup' %}" class="text-decoration-none primary">Sign up here</a>.
+          </p>
+        </div>
+      </form>
+    {% endif %}
+
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  <script>
+    function setState(value) {
+      document.getElementById('state').value = value // Set the input value to the selected state
+    }
+  </script>
+
+  <script>
+    // JavaScript to toggle password visibility
+    const passwordInput = document.getElementById('password')
+    const togglePassword = document.getElementById('togglePassword')
+    const toggleIcon = togglePassword.querySelector('i')
+    
+    togglePassword.addEventListener('click', function () {
+      const isPassword = passwordInput.getAttribute('type') === 'password'
+      passwordInput.setAttribute('type', isPassword ? 'text' : 'password')
+      toggleIcon.classList.toggle('fa-eye-slash', !isPassword)
+      toggleIcon.classList.toggle('fa-eye', isPassword)
+    })
+    
+    // JavaScript to toggle confirm password visibility
+    const confirmPasswordInput = document.getElementById('confirm_password')
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword')
+    const confirmIcon = toggleConfirmPassword.querySelector('i')
+    
+    toggleConfirmPassword.addEventListener('click', function () {
+      const isPassword = confirmPasswordInput.getAttribute('type') === 'password'
+      confirmPasswordInput.setAttribute('type', isPassword ? 'text' : 'password')
+      confirmIcon.classList.toggle('fa-eye-slash', !isPassword)
+      confirmIcon.classList.toggle('fa-eye', isPassword)
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  View Application
+{% endblock %}
+
+{% block content %}
+  <div class="container col-auto mb-5">
+
+    <div class="d-flex justify-content-center align-items-center">
+      <p class="d-flex align-items-center">View Application</p>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <p>Application</p>
+      <p>Register Check in Mark</p>
+      <!-- <div id="icon-container"></div>  Container for the SVG icon -->
+    </div>
+
+    <div class="bg-secondary text-white p-4 mb-4 d-flex justify-content-between align-items-center" style="width: 700px; height: 80px;">
+      <p class="mb-0">Application Details For {{ application.student.user.username }}</p>
+      <div id="icon-container"></div> <!-- Container for the SVG icon -->
+    </div>
+
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Check the eligibility status
+      const isEligible = {{ application.student.eligible_for_application|yesno:"true,false" }};
+      const iconContainer = document.getElementById("icon-container");
+      
+      // Create the SVG elements based on the eligibility status
+      if (isEligible) {
+        // SVG for eligible applications
+        iconContainer.innerHTML = `
+          <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
+        `;
+      } else {
+        // SVG for ineligible applications
+        iconContainer.innerHTML = `
+          <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
+        `;
+      }
+    });
+  </script>
+{% endblock %}

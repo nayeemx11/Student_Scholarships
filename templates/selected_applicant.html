@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  View Application
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
+      <p class="d-flex align-items-center">View Application</p>
+    </div>
+
+    <div class="container-fluid col-12">
+      <div class="d-flex mb-3 justify-content-between align-items-center">
+        <p class="col-5 mb-0">Applicant name</p>
+        <p class="col-3 mb-0">Select</p>
+        <p class="col-3 mb-0">Conflict</p>
+        <p class="col-3 mb-0">Message for aworded</p>
+      </div>
+
+      {% for application in applications %}
+        <a href="{% url 'info_send' application.id %}">
+          <div class="bg-secondary text-white p-4 mb-4 d-flex justify-content-between align-items-center" style="height: 80px;">
+            <p class="mb-0">
+              <strong>{{ application.student.user.username }}</strong>
+            </p>
+            <div id="select-{{ forloop.counter }}"></div>
+            <div id="conflict"></div>
+            <i class="fa-regular fa-comment"></i>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      {% for application in applications %}
+        const canGetScholarship = {{ application.can_get_scholarship|yesno:"true,false" }};
+        const selectIconContainer = document.getElementById("select-{{ forloop.counter }}");
+
+        if (canGetScholarship) {
+          selectIconContainer.innerHTML = `
+            <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
+          `;
+        } else {
+          selectIconContainer.innerHTML = `
+            <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
+          `;
+        }
+      {% endfor %}
+    });
+  </script>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

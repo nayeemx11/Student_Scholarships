@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  View Application
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
+      <p class="d-flex align-items-center">View Application</p>
+    </div>
+
+    <div class="container-fluid col-12">
+      <div class="d-flex mb-3 justify-content-between align-items-center">
+        <p class="col-6 mb-0">Applicant Name</p>
+        <p class="col-3 mb-0">Date</p>
+        <p class="col-3 mb-0">Amount</p>
+      </div>
+
+      {% for award in awards %}
+        <a href="{% url 'info_send' award.student_id %}">
+          <div class="bg-secondary text-white p-4 mb-4 d-flex justify-content-between align-items-center" style="height: 80px;">
+            <p class="mb-0">
+              <strong>{{ award.student.user.username }}</strong>
+            </p>
+            <p class="mb-0">{{ award.awarded_date }}</p>
+            <p class="mb-0">{{ award.amount }}</p>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

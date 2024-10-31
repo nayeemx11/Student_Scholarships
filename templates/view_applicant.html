@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  View Application
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
+      <p class="d-flex align-items-center">View Application</p>
+    </div>
+
+    <div class="container-fluid col-12">
+      <div class="d-flex mb-3 justify-content-between align-items-center">
+        <p class="col-6 mb-0">Application</p>
+        <p class="col-5 mb-0">Register Check in Mark</p>
+        <p class="col-1 mb-0">Select</p>
+      </div>
+
+      {% for application in applications %}
+        <div class="bg-secondary text-white p-4 mb-4 d-flex justify-content-between align-items-center" style="height: 80px;">
+          <p class="mb-0">
+            Application Details for <strong>{{ application.student.user.username }}</strong>
+          </p>
+          <!-- Unique IDs for each icon container -->
+          <div id="reg-{{ forloop.counter }}"></div>
+          <div id="select-{{ forloop.counter }}"></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Loop through each application
+      {% for application in applications %}
+        const isEligible = {{ application.student.eligible_for_application|yesno:"true,false" }};
+        const canGetScholarship = {{ application.can_get_scholarship|yesno:"true,false" }};
+
+        // Select containers using the unique IDs
+        const regIconContainer = document.getElementById("reg-{{ forloop.counter }}");
+        const selectIconContainer = document.getElementById("select-{{ forloop.counter }}");
+
+        // Update the register icon
+        if (isEligible) {
+          regIconContainer.innerHTML = `
+            <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
+          `;
+        } else {
+          regIconContainer.innerHTML = `
+            <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
+          `;
+        }
+
+        // Update the select icon
+        if (canGetScholarship) {
+          selectIconContainer.innerHTML = `
+            <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
+          `;
+        } else {
+          selectIconContainer.innerHTML = `
+            <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
+          `;
+        }
+      {% endfor %}
+    });
+  </script>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block title_section %}
+  View Application
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
+      <p class="d-flex align-items-center">View Application</p>
+    </div>
+
+    <div class="container-fluid col-12">
+      <div class="d-flex mb-3 justify-content-between align-items-center">
+        <p class="col-6 mb-0">Application</p>
+        <p class="col-5 mb-0">Register Check in Mark</p>
+        <p class="col-1 mb-0">Select</p>
+      </div>
+
+      {% for application in applications %}
+        <div class="bg-secondary text-white p-4 mb-4 d-flex justify-content-between align-items-center" style="height: 80px;">
+          <p class="mb-0">
+            Application Details for <strong>{{ application.student.user.username }}</strong>
+          </p>
+          <div id="reg"></div> <!-- green if Register SVG icon -->
+          <div id="select"></div> <!-- red if non select SVG icon -->
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Check the eligibility status
+      const isEligible = {{ application.student.eligible_for_application|yesno:"true,false" }};
+      const iconContainer = document.getElementById("reg");
+      
+      // Create the SVG elements based on the eligibility status
+      if (isEligible) {
+        // SVG for eligible applications
+        iconContainer.innerHTML = `
+          <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
+        `;
+      } else {
+        // SVG for ineligible applications
+        iconContainer.innerHTML = `
+          <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
+        `;
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Check the eligibility status
+      const isEligible = {{ application.can_get_scholarship|yesno:"true,false" }};
+      const iconContainer = document.getElementById("select");
+      
+      // Create the SVG elements based on the eligibility status
+      if (isEligible) {
+        // SVG for eligible applications
+        iconContainer.innerHTML = `
+          <svg width="24" height="24" fill="green" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/></svg>
+        `;
+      } else {
+        // SVG for ineligible applications
+        iconContainer.innerHTML = `
+          <svg width="24" height="24" fill="red" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" /></svg>
+        `;
+      }
+    });
+  </script>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %} {% endcomment %}

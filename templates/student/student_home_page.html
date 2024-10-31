@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title_section %}
+  Student Home page | SS
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% if user.is_authenticated %}
+      <h1 class="mb-5">Welcome {{ user.username }}.</h1>
+
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-4 d-flex flex-column align-items-center mt-5">
+            <a class="text-white" style="text-decoration: none; color: inherit;" href="{% url 'update_student_info' %}"><button class="btn btn-primary mb-3 p-3" style="width: 250px;">Apply for Scholarship</button></a>
+            <a class="text-white" style="text-decoration: none; color: inherit;" href="{% url 'verify_student' %}"><button class="btn btn-primary mb-3 p-3" style="width: 250px;">View Scholarship</button></a>
+            <a class="text-white" style="text-decoration: none; color: inherit;" href="{% url 'message' %}"><button class="btn btn-primary mb-3 p-3" style="width: 250px;">View Message</button></a>
+          </div>
+          <div class="col-4 d-flex justify-content-center">
+            <hr class="border border-primary border-2 opacity-75" style="width: 1px; height: 300px;" />
+          </div>
+          <div class="col-4 text-center">
+            <h1>Profile</h1>
+            <div class="rounded-circle bg-secondary mb-3 mx-auto" style="width: 200px; height: 200px;"></div>
+            <button class="btn btn-outline-primary mb-3 mx-auto" disabled style="opacity: 1; pointer-events: none; width: 250px;">Student Name</button>
+            <button class="btn btn-outline-primary mb-3 mx-auto" disabled style="opacity: 1; pointer-events: none; width: 250px;">Student ID</button>
+            <button class="btn btn-outline-primary mb-3 mx-auto" disabled style="opacity: 1; pointer-events: none; width: 250px;">Student Email</button>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <!-- logic for is not logged in -->
+    {% endif %}
+
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endblock %}
